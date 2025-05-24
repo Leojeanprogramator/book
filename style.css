@@ -316,10 +316,11 @@ body.light-theme #searchInput {
 }
 
 /* Detalhes View */
-.detalhes-section {
-    padding: 40px 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+#detalhesView {
+  padding: 40px 20px;
+  background: var(--bg-color);
+  min-height: 100vh;
+}
 }
 
 .btn-voltar {

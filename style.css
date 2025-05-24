@@ -364,20 +364,23 @@ body.light-theme #searchInput {
 }
 
 .btn-voltar {
-    padding: 12px 24px;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    font-weight: 600;
-    transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  margin: 20px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .btn-voltar:hover {
-    background: var(--primary-gradient-end);
-    transform: translateX(-5px);
+  transform: translateX(-5px);
+  background: linear-gradient(135deg, var(--primary-gradient-end), #6a0dad);
 }
 
 .detalhes-produto {

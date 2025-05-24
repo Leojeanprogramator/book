@@ -1,146 +1,60 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Book Haven - Seu Refúgio Literário</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* Estilos do menu mobile otimizados */
-    #toggleCategorias {
-      display: none;
-    }
-
-    @media (max-width: 768px) {
-      #toggleCategorias {
-        display: block;
-        margin: 10px;
-        padding: 12px 16px;
-        font-size: 16px;
-        cursor: pointer;
-        border-radius: 8px;
-        background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
-        color: white;
-        border: none;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        transition: transform 0.2s ease;
-      }
-
-      #toggleCategorias:hover {
-        transform: scale(1.02);
-      }
-
-      #categoriasMenu {
-        display: none;
-        margin: 10px;
-        padding: 15px;
-        border-radius: 8px;
-        background: var(--card-bg);
-        border: 1px solid var(--border-color);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-      }
-
-      #categoriasMenu.open {
-        display: block;
-        animation: slideDown 0.3s ease;
-      }
-
-      @keyframes slideDown {
-        from {
-          opacity: 0;
-          transform: translateY(-10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Book Haven - Seu Refúgio Literário</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="header" id="header">
-    <div class="logo">
-      <img src="https://i.postimg.cc/yxZdWLYP/logo-transparente.png" alt="Logo Book Haven" />
-      <span>Book Haven</span>
-    </div>
-    <input 
-      type="text" 
-      id="searchInput" 
-      class="search-input" 
-      placeholder="O que você quer ler?" 
-      aria-label="Buscar livros"
-    />
-  </header>
+    <header class="header" id="header">
+        <div class="logo">
+            <img src="https://i.postimg.cc/yxZdWLYP/logo-transparente.png" alt="Logo Book Haven" />
+            <span>Book Haven</span>
+        </div>
+        <input type="text" id="searchInput" class="search-input" placeholder="O que você quer ler?" />
+    </header>
 
-  <section class="hero" id="heroSection">
-    <video autoplay muted loop playsinline>
-      <source src="https://cdn.pixabay.com/video/2020/09/08/49375-459436752_large.mp4" type="video/mp4" />
-      Seu navegador não suporta vídeo.
-    </video>
-    <div class="hero-text">
-      <h1>Seu Refúgio Literário</h1>
-      <p>Encontre o livro perfeito para você</p>
-      <a href="#catalogoView" class="btn-explore" aria-label="Explorar catálogo">Ver Mais</a>
-    </div>
-  </section>
-
-  <button 
-    id="toggleCategorias" 
-    class="menu-categorias" 
-    aria-expanded="false" 
-    aria-controls="categoriasMenu" 
-    aria-label="Abrir menu de categorias"
-  >
-    <span aria-hidden="true">&#9776;</span> Categorias
-  </button>
-
-  <nav class="categorias" id="categoriasMenu" aria-label="Categorias de livros">
-    <button class="categoria-btn ativa" data-categoria="todos" aria-pressed="true">Todos</button>
-    <button class="categoria-btn" data-categoria="desenvolvimento" aria-pressed="false">Desenvolvimento Pessoal</button>
-    <button class="categoria-btn" data-categoria="romance" aria-pressed="false">Romance</button>
-    <button class="categoria-btn" data-categoria="ficcao" aria-pressed="false">Ficção Científica</button>
-    <button class="categoria-btn" data-categoria="drama" aria-pressed="false">Drama</button>
-    <button class="categoria-btn" data-categoria="suspense" aria-pressed="false">Suspense</button>
-  </nav>
-
-  <main>
-    <section id="catalogoView" aria-label="Catálogo de livros">
-      <div class="produtos" id="produtos"></div>
-      <div class="paginacao" id="paginacao" aria-label="Paginação"></div>
+    <section class="hero" id="heroSection">
+        <video autoplay muted loop playsinline>
+            <source src="https://cdn.pixabay.com/video/2020/09/08/49375-459436752_large.mp4" type="video/mp4" />
+            Seu navegador não suporta vídeo.
+        </video>
+        <div class="hero-text">
+            <h1>Seu Refúgio Literário</h1>
+            <p>Encontre o livro perfeito para você</p>
+            <a href="#catalogoView" class="btn-explore">Ver Mais</a>
+        </div>
     </section>
 
-    <section id="detalhesView" class="detalhes-view" hidden aria-label="Detalhes do livro">
-      <button class="btn-voltar" aria-label="Voltar ao catálogo">
-        <span aria-hidden="true">←</span> Voltar ao catálogo
-      </button>
-      <div id="detalhesProduto" class="detalhes-produto"></div>
-    </section>
-  </main>
+    <button id="toggleCategorias" class="menu-categorias">
+        &#9776; Categorias
+    </button>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const toggleBtn = document.getElementById('toggleCategorias');
-      const menu = document.getElementById('categoriasMenu');
+    <nav class="categorias" id="categoriasMenu">
+        <button class="categoria-btn ativa" data-categoria="todos">Todos</button>
+        <button class="categoria-btn" data-categoria="desenvolvimento">Desenvolvimento Pessoal</button>
+        <button class="categoria-btn" data-categoria="romance">Romance</button>
+        <button class="categoria-btn" data-categoria="ficcao">Ficção Científica</button>
+        <button class="categoria-btn" data-categoria="drama">Drama</button>
+        <button class="categoria-btn" data-categoria="suspense">Suspense</button>
+    </nav>
 
-      toggleBtn.addEventListener('click', function () {
-        const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-        toggleBtn.setAttribute('aria-expanded', !isExpanded);
-        menu.classList.toggle('open');
-      });
+    <main>
+        <section id="catalogoView">
+            <div class="produtos" id="produtos"></div>
+            <div class="paginacao" id="paginacao"></div>
+        </section>
 
-      // Fechar menu ao clicar fora
-      document.addEventListener('click', function(event) {
-        if (!menu.contains(event.target) && !toggleBtn.contains(event.target)) {
-          menu.classList.remove('open');
-          toggleBtn.setAttribute('aria-expanded', 'false');
-        }
-      });
-    });
-  </script>
+        <section id="detalhesView" class="detalhes-view" hidden>
+            <button class="btn-voltar">← Voltar ao catálogo</button>
+            <div id="detalhesProduto" class="detalhes-produto"></div>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="livros.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>

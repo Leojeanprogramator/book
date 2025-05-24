@@ -412,7 +412,7 @@ body.light-theme .detalhes-produto img {
 }
 
 /* Responsividade */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
     header.header {
         padding: 12px;
         flex-direction: column;

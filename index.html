@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Book Haven - Seu Refúgio Literário</title>
     <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="header" id="header">
@@ -28,33 +27,38 @@
         </div>
     </section>
 
-    <button id="toggleCategorias" class="menu-categorias">
+    <!-- Botão que só aparece no mobile para abrir/fechar categorias -->
+    <button id="toggleCategorias" 
+            class="menu-categorias" 
+            aria-expanded="false" 
+            aria-controls="categoriasMenu" 
+            aria-label="Abrir menu de categorias">
         &#9776; Categorias
     </button>
 
-    <nav class="categorias" id="categoriasMenu">
-        <button class="categoria-btn ativa" data-categoria="todos">Todos</button>
-        <button class="categoria-btn" data-categoria="desenvolvimento">Desenvolvimento Pessoal</button>
-        <button class="categoria-btn" data-categoria="romance">Romance</button>
-        <button class="categoria-btn" data-categoria="ficcao">Ficção Científica</button>
-        <button class="categoria-btn" data-categoria="drama">Drama</button>
-        <button class="categoria-btn" data-categoria="suspense">Suspense</button>
+    <!-- Menu de categorias -->
+    <nav class="categorias" id="categoriasMenu" aria-label="Categorias de livros">
+        <button class="categoria-btn ativa" data-categoria="todos" aria-pressed="true">Todos</button>
+        <button class="categoria-btn" data-categoria="desenvolvimento" aria-pressed="false">Desenvolvimento Pessoal</button>
+        <button class="categoria-btn" data-categoria="romance" aria-pressed="false">Romance</button>
+        <button class="categoria-btn" data-categoria="ficcao" aria-pressed="false">Ficção Científica</button>
+        <button class="categoria-btn" data-categoria="drama" aria-pressed="false">Drama</button>
+        <button class="categoria-btn" data-categoria="suspense" aria-pressed="false">Suspense</button>
     </nav>
 
-    <main>
-        <section id="catalogoView">
-            <div class="produtos" id="produtos"></div>
-            <div class="paginacao" id="paginacao"></div>
-        </section>
+    <!-- Seção do Catálogo -->
+    <section id="catalogoView" class="catalogo-section">
+        <div id="produtos" class="produtos-grid"></div>
+        <div id="paginacao" class="paginacao"></div>
+    </section>
 
-        <section id="detalhesView" class="detalhes-view" hidden>
-            <button class="btn-voltar">← Voltar ao catálogo</button>
-            <div id="detalhesProduto" class="detalhes-produto"></div>
-        </section>
-    </main>
+    <!-- Seção de Detalhes do Livro -->
+    <section id="detalhesView" class="detalhes-section" style="display: none;">
+        <button class="btn-voltar" onclick="voltarCatalogo()">Voltar ao Catálogo</button>
+        <div id="detalhesProduto" class="detalhes-produto"></div>
+    </section>
 
-    <!-- Scripts -->
-    <script src="livros.js"></script>
-    <script src="main.js"></script>
+    <!-- Script do seu JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>

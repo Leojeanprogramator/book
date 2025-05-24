@@ -363,7 +363,9 @@ body.light-theme #searchInput {
 }
 
 .btn-voltar {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     padding: 12px 24px;
     margin: 20px;
     border: none;
@@ -373,15 +375,28 @@ body.light-theme #searchInput {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    text-align: center;
-    width: auto;
-    min-width: 200px;
     box-shadow: 0 4px 10px var(--shadow-color);
 }
 
 .btn-voltar:hover {
     transform: translateX(-5px);
     background: linear-gradient(135deg, var(--primary-gradient-end), #6a0dad);
+}
+
+/* Ajustes para mobile */
+@media (max-width: 768px) {
+    .btn-voltar {
+        margin: 15px;
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn-voltar {
+        margin: 10px;
+        padding: 8px 16px;
+    }
 }
 
 /* Ajustes para mobile */

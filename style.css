@@ -361,7 +361,6 @@ body.light-theme #searchInput {
   background: var(--bg-color);
   min-height: 100vh;
 }
-}
 
 .btn-voltar {
   display: inline-flex;
@@ -382,7 +381,6 @@ body.light-theme #searchInput {
   transform: translateX(-5px);
   background: linear-gradient(135deg, var(--primary-gradient-end), #6a0dad);
 }
-
 .detalhes-produto {
   background: var(--card-bg-glass);
   border-radius: 16px;

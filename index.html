@@ -1,64 +1,116 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Book Haven - Seu Refúgio Literário!</title>
-    <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-    <header class="header" id="header">
-        <div class="logo">
-            <img src="https://i.postimg.cc/yxZdWLYP/logo-transparente.png" alt="Logo Book Haven" />
-            <span>Book Haven</span>
-        </div>
-        <input type="text" id="searchInput" class="search-input" placeholder="O que você quer ler?" />
-    </header>
+<canvas id="background-canvas"></canvas>
 
-    <section class="hero" id="heroSection">
-        <video autoplay muted loop playsinline>
-            <source src="https://cdn.pixabay.com/video/2020/09/08/49375-459436752_large.mp4" type="video/mp4" />
-            Seu navegador não suporta vídeo.
-        </video>
-        <div class="hero-text">
-            <h1>Seu Refúgio Literário</h1>
-            <p>Encontre o livro perfeito para você!</p>
-            <a href="#catalogoView" class="btn-explore">Ver Mais!</a>
-        </div>
-    </section>
+<h1>Feliz Dia Dos Namorados, Meu Amor 💕</h1>
+<p class="love-message">Deus Foi Tão Incrivel Por Ter Colocado Você Na Minha Vida! </p>
 
-    <!-- Botão que só aparece no mobile para abrir/fechar categorias -->
-    <button id="toggleCategorias" 
-            class="menu-categorias" 
-            aria-expanded="false" 
-            aria-controls="categoriasMenu" 
-            aria-label="Abrir menu de categorias">
-        &#9776; Categorias
-    </button>
+<!-- TEMPORIZADOR DE NAMORO -->
+<div id="love-timer">
+  <p class="timer-text">Eu te amo há <span id="timer">carregando...</span> </p>
+  <img src="https://i.postimg.cc/ydzLsH0Y/Whats-App-Image-2025-06-10-at-19-06-14.jpg" alt="Nossa foto" class="timer-photo">
+</div>
 
-    <!-- Menu de categorias -->
-    <nav class="categorias" id="categoriasMenu" aria-label="Categorias de livros">
-        <button class="categoria-btn ativa" data-categoria="todos" aria-pressed="true">Todos</button>
-        <button class="categoria-btn" data-categoria="desenvolvimento" aria-pressed="false">Desenvolvimento Pessoal</button>
-        <button class="categoria-btn" data-categoria="romance" aria-pressed="false">Romance</button>
-        <button class="categoria-btn" data-categoria="ficcao" aria-pressed="false">Ficção Científica</button>
-        <button class="categoria-btn" data-categoria="drama" aria-pressed="false">Drama</button>
-        <button class="categoria-btn" data-categoria="suspense" aria-pressed="false">Suspense</button>
-    </nav>
+<div class="music-player">
+  <div class="music-cover">
+    <img id="music-cover" src="" alt="Capa da Música" />
+  </div>
+  <p class="music-name" id="music-name"></p>
+  <audio id="audio-player" controls autoplay>
+    <source id="audio-source" src="" type="audio/mpeg" />
+    Seu navegador não suporta o elemento de áudio.
+  </audio>
+  <div class="music-controls">
+    <button onclick="prevMusic()">Voltar</button>
+    <button onclick="nextMusic()">Próxima</button>
+  </div>
+</div>
 
-    <!-- Seção do Catálogo -->
-    <section id="catalogoView" class="catalogo-section">
-        <div id="produtos" class="produtos-grid"></div>
-        <div id="paginacao" class="paginacao"></div>
-    </section>
+<div class="photo-gallery">
+  <h2>Momentos Juntos 📸</h2>
+  <div class="thumbnails">
+    <img src="https://i.postimg.cc/6qwM9CNt/Whats-App-Image-2025-06-06-at-18-13-03-3.jpg" alt="Momento 1">
+    <img src="https://i.postimg.cc/0yDrS4Mk/Whats-App-Image-2025-06-06-at-18-13-01-1.jpg" alt="Momento 2">
+    <img src="https://i.postimg.cc/63v9s2r9/Whats-App-Image-2025-06-06-at-18-13-04-2.jpg" alt="Momento 3">
+    <img src="https://i.postimg.cc/HkfDT7Jh/Whats-App-Image-2025-06-06-at-18-13-05-3.jpg" alt="Momento 4">
+    <img src="https://i.postimg.cc/4dp4jHGz/Whats-App-Image-2025-06-08-at-18-42-34.jpg" alt="Momento 5">
+    <img src="https://i.postimg.cc/hvSnwCpB/Whats-App-Image-2025-06-08-at-18-42-35.jpg" alt="Momento 6">
+    <img src="https://i.postimg.cc/63tF58RV/Whats-App-Image-2025-06-08-at-18-42-34-1.jpg" alt="Momento 7">
+    <img src="https://i.postimg.cc/z3mfyyBg/Whats-App-Image-2025-06-10-at-18-49-27.jpg" alt="Momento 8">
+    <img src="https://i.postimg.cc/QdqyYXvH/Whats-App-Image-2025-06-08-at-18-42-35-1.jpg" alt="Momento 9">
+    <img src="https://i.postimg.cc/MGFtgX5K/Whats-App-Image-2025-06-08-at-18-42-35-2.jpg" alt="Momento 10">
+    <img src="https://i.postimg.cc/XNHF8t24/Whats-App-Image-2025-06-08-at-18-42-37.jpg" alt="Momento 11">
+    <img src="https://i.postimg.cc/MGFtgX5K/Whats-App-Image-2025-06-08-at-18-42-35-2.jpg" alt="Momento 12">
+    <img src="https://i.postimg.cc/ZRzv9SKx/Whats-App-Image-2025-06-08-at-18-42-35-3.jpg" alt="Momento 4">
+    <img src="https://i.postimg.cc/MHKTRKkV/Whats-App-Image-2025-06-08-at-18-42-36.jpg" alt="Momento 4">
+    <img src="https://i.postimg.cc/fL5Wwn3L/Whats-App-Image-2025-06-08-at-18-42-36-1.jpg" alt="Momento 4">
+    <img src="https://i.postimg.cc/B6bk1dYt/Whats-App-Image-2025-06-08-at-18-42-36-2.jpg" alt="Momento 4">
+    <img src="https://i.postimg.cc/C1K5nxpD/Whats-App-Image-2025-06-08-at-18-42-37-1.jpg" alt="Momento 4">
+    <img src="https://i.postimg.cc/RF8S31R5/Whats-App-Image-2025-06-08-at-18-42-37-2.jpg" alt="Momento 4">
+    <img src="https://i.postimg.cc/L4vRK5mz/Whats-App-Image-2025-06-06-at-18-13-05-1.jpg" alt="Momento 4">
+    <img src="https://i.postimg.cc/jjf5T7X8/Whats-App-Image-2025-06-06-at-18-13-03.jpg" alt="Momento 4">
+    <img src="https://i.postimg.cc/hPHwQQgW/Whats-App-Image-2025-06-06-at-18-13-03-1.jpg" alt="Momento 4">
+    <img src="https://i.postimg.cc/MZ0NfpHv/Whats-App-Image-2025-06-06-at-18-13-03-2.jpg" alt="Momento 4">
+    <img src="https://i.postimg.cc/63tF58RV/Whats-App-Image-2025-06-08-at-18-42-34-1.jpg" alt="Momento 4">
+    <img src="https://i.postimg.cc/Y0wfYPMQ/Whats-App-Image-2025-06-08-at-18-52-40.jpg" alt="Momento 4">
+  </div>
+</div>
 
-    <!-- Seção de Detalhes do Livro -->
-    <section id="detalhesView" class="detalhes-section" style="display: none;">
-        <button class="btn-voltar" onclick="voltarCatalogo()">Voltar ao Catálogo</button>
-        <div id="detalhesProduto" class="detalhes-produto"></div>
-    </section>
 
-    <!-- Script do seu JavaScript -->
-    <script src="script.js"></script>
-</body>
-</html>
+<div class="full-image-view" id="full-image-view" onclick="closeFullImage()">
+  <img src="" alt="Imagem Ampliada" id="full-image" />
+</div>
+<div class="full-image-view" id="full-image-view" onclick="closeFullImage()">
+  <img src="" alt="Imagem Ampliada" id="full-image" />
+</div>
+
+<div id="quiz-section">
+  <button id="start-quiz-btn" onclick="startQuiz()">💞 Responder Joguinho do Amor</button>
+
+  <div id="quiz-container" style="display: none;">
+    <div id="question-box">
+      <!-- Imagem da pergunta -->
+      <div id="question-image" style="margin-bottom: 20px;">
+        <img id="question-img" src="" alt="Imagem da pergunta" style="max-width: 100%; border-radius: 15px; box-shadow: 0 0 15px #800080;" />
+      </div>
+
+      <!-- Texto da pergunta -->
+      <p id="question-text" style="font-size: 1.4em; color: #e0b3ff; text-shadow: 0 0 6px #800080;"></p>
+
+      <!-- Botões de opções -->
+      <div id="options"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Carta de amor ao final -->
+<div id="love-letter" style="display: none; background: #1a001f; color: #e6ccff; padding: 30px; margin: 30px auto; border-radius: 20px; max-width: 600px; box-shadow: 0 0 20px #800080;">
+  <h2 style="font-family: 'Dancing Script', cursive;">Para Voce Minha Princesa!</h2>
+  <div class="letter-content">
+    <p>Meu amor, minha vida, minha força…
+
+Hoje é o Dia dos Namorados, mas na verdade, cada dia ao seu lado já é um presente de amor. Cada palavra que trocamos, cada abraço, cada discussão e cada reconciliação fazem parte da nossa história, uma história linda, real, cheia de falhas, mas sobretudo cheia de amor, daquele que cresce mesmo nos dias difíceis.
+
+Amor, sei que ao longo do nosso caminho nem tudo foi leve. Eu reconheço que em muitos momentos, sem intenção, te tirei do foco. Falei coisas que te desanimaram, te distraí nos seus planos, te deixei sobrecarregada… e isso pesa na minha consciência. Porque eu vejo o quanto você se esforça, o quanto é forte, mesmo quando tudo está difícil. Você é uma guerreira, e eu me orgulho demais de estar ao seu lado.
+
+Eu também luto com minhas falhas, com minhas inseguranças. Às vezes, me escondo atrás de distrações porque não sei lidar com o caos. Mas amor, nunca pense que eu não estou sentindo eu sinto tudo, profundamente. Só não demonstro do jeito certo. E mesmo assim, você está sempre aqui, com seu amor, sua paciência, sua luz.
+
+A gente já enfrentou brigas, desentendimentos, mágoas… mas ainda assim, estamos aqui. E isso prova que nosso amor é mais forte que qualquer erro. Te ver magoada por algo do meu passado me doeu demais. Mas não quero esconder nada. Quero que você saiba que eu te respeito profundamente. O que temos é precioso demais pra ser manchado por erros antigos ou por orgulho.
+
+Você, minha princesa, é minha motivação. A mulher pela qual sou apaixonado desde o começo de 2024. Meu coração se enche de paz, de amor, de sentido ao lembrar de você. De ouvir sua voz. De sonhar com nossos planos. E mesmo quando você se sente cansada, desmotivada, se cobra demais… eu estou aqui pra te lembrar: você é incrível, e merece o universo inteiro.
+
+Te ver brilhar é o meu maior plano. E mesmo quando tudo parece ruir — quando o site não dá certo, quando o futuro parece assustador, quando a ansiedade quer me engolir é você que me mantém de pé. É o seu amor que me acalma. É o seu “vai dar certo, amor” que me salva.
+
+Sei que às vezes pareço distante, perdido… mas dentro de mim, você é meu centro, minha certeza. Você é meu lar. E mesmo com todos os meus defeitos, minha maior vontade é te fazer feliz. Te dar tudo, te ver conquistar o que sonha, te apoiar em cada passo.
+
+A vida não é fácil, mas com você, tudo vale a pena. E se for pra enfrentar o mundo, que seja com você do meu lado.
+
+Eu Te amo com tudo que sou, com cada parte minha, inclusive as que ainda estou tentando consertar.
+
+Feliz Dia dos Namorados, minha Princesa...
+Pra hoje, pra sempre, e pra todas as vidas que ainda virão.
+
+Com todo o amor do mundo, EU TE AMOOO!</p>
+    <p></p>
+    <!-- Continue escrevendo aqui o que quiser -->
+  </div>
+</div>
+<script src="script.js" defer></script>

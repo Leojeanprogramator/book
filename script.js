@@ -1,301 +1,298 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+const musics = [
+  {name: "Porque bem sei os planos que tenho para vocês, diz o Senhor... - Mal sabíamos que aquele momento, aquele olhar, aquele toque... seria o começo da nossa história. Mas Deus já sabia. Ele escreveu cada capítulo com amor, e hoje eu entendo: você sempre foi parte do plano dele pra mim... ", src: "https://files.catbox.moe/90pg77.mp3", cover: "https://i.postimg.cc/C1K5nxpD/Whats-App-Image-2025-06-08-at-18-42-37-1.jpg"},
+  {name: "Quem encontra uma esposa, acha o bem e alcança a benevolência do Senhor... - Você é minha bênção diária, a melhor parte dos meus dias. Te ter é meu maior presente de Deus.", src: "https://files.catbox.moe/zofwhf.mp3", cover: "https://i.postimg.cc/jjf5T7X8/Whats-App-Image-2025-06-06-at-18-13-03.jpg"},
+  {name: "Melhor é serem dois do que um... Com você ao meu lado, tudo se torna mais leve. A vida a dois com você é mais que amor: é um pedacinho do céu aqui na Terra...", src: "https://files.catbox.moe/mmobxs.mp3", cover: "https://i.postimg.cc/4dp4jHGz/Whats-App-Image-2025-06-08-at-18-42-34.jpg"},
+  {name: "Eu sou do meu amado, e o meu amado é meu... Te pertencer com o coração e ser seu com alma inteira é o que Deus sonhou pra nós. Somos um amor escrito pelo Céu.", src: "https://files.catbox.moe/oqyvcc.mp3", cover: "https://i.postimg.cc/jjf5T7X8/Whats-App-Image-2025-06-06-at-18-13-03.jpg"},
+  {name: "Confia no Senhor de todo o teu coração... Com você, eu aprendi que o amor e a fé caminham juntos. Entrego a Deus nosso relacionamento, porque sei que Ele tem planos lindos pra nós.", src: "https://files.catbox.moe/bn9uk0.mp3", cover: "https://i.postimg.cc/25yN4b3z/Whats-App-Image-2025-06-08-at-18-42-36-3.jpg"},
+  {name: "Edifiquemos-nos uns aos outros... Nosso amor é construção diária, feita de carinho, respeito e fé. Ao seu lado, aprendi que amar é também crescer, juntos, com Deus como base. ", src: "https://files.catbox.moe/pdc42j.mp3", cover: "https://i.postimg.cc/hPHwQQgW/Whats-App-Image-2025-06-06-at-18-13-03-1.jpg"},
+  {name: "O amor lança fora todo o medo... Seu amor é meu abrigo seguro, onde a alma encontra descanso. Com você, até os dias difíceis se enchem de paz.", src: "https://files.catbox.moe/s1wfht.mp3", cover: "https://i.postimg.cc/MZ0NfpHv/Whats-App-Image-2025-06-06-at-18-13-03-2.jpg"}
+];
 
-html, body {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
-  font-family: 'Dancing Script', cursive;
-  overflow-x: hidden;
-  background: #0b0012; /* fundo bem escuro */
-  color: #d1c4e9; /* roxo suave de leitura */
-  text-align: center;
-  cursor: pointer;
-  position: relative;
+let currentMusicIndex = 0;
+const audio = document.getElementById("audio-player");
+const audioSource = document.getElementById("audio-source");
+const musicName = document.getElementById("music-name");
+const musicCover = document.getElementById("music-cover");
+
+function updateMusic() {
+  const current = musics[currentMusicIndex];
+  audioSource.src = current.src;
+  musicName.textContent = current.name;
+  musicCover.src = current.cover;
+  audio.load();
+  audio.play();
 }
 
-h1 {
-  font-size: 3em;
-  color: #9d4edd;
-  margin-top: 30px;
-  text-shadow: 0 0 15px #5f0f40;
+function nextMusic() {
+  currentMusicIndex = (currentMusicIndex + 1) % musics.length;
+  updateMusic();
 }
 
-p.love-message {
-  font-size: 1.4em;
-  color: #b388eb;
-  margin-bottom: 20px;
-  text-shadow: 0 0 10px #7b2cbf;
+function prevMusic() {
+  currentMusicIndex = (currentMusicIndex - 1 + musics.length) % musics.length;
+  updateMusic();
 }
 
-.music-player, .gallery, .love-note-btn {
-  background: rgba(75, 0, 130, 0.1);
-  box-shadow: 0 0 18px rgba(125, 70, 190, 0.5);
-  border-radius: 20px;
-  margin: 20px auto;
-  padding: 20px;
-  width: 280px;
-  transition: transform 0.3s ease, box-shadow 0.3s;
+updateMusic();
+
+function togglePopup() {
+  const popup = document.getElementById("love-note-popup");
+  popup.style.display = popup.style.display === "block" ? "none" : "block";
 }
 
-.music-player:hover, .gallery:hover, .love-note-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px #9d4edd;
+const fullImageView = document.getElementById("full-image-view");
+const fullImage = document.getElementById("full-image");
+
+function openFullImage(img) {
+  fullImage.src = img.src;
+  fullImageView.style.display = "flex";
 }
 
-.music-cover img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 15px;
-  box-shadow: 0 0 18px #5a189a;
+function closeFullImage() {
+  fullImageView.style.display = "none";
 }
 
-audio {
-  width: 100%;
-  margin-top: 10px;
-  filter: brightness(0.8) saturate(1.2);
-  border-radius: 15px;
+document.body.addEventListener("click", function(e) {
+  if(e.target.tagName.toLowerCase() === 'button' || e.target.tagName.toLowerCase() === 'audio' || e.target.closest('.music-player')) {
+    return;
+  }
+  const heart = document.createElement("div");
+  heart.classList.add("click-heart");
+  heart.style.left = e.pageX + "px";
+  heart.style.top = e.pageY + "px";
+  heart.textContent = "💖";
+  document.body.appendChild(heart);
+  setTimeout(() => {
+    heart.remove();
+  }, 1000);
+});
+
+// Background animation
+const canvas = document.getElementById("background-canvas");
+const ctx = canvas.getContext("2d");
+let width, height;
+
+function resize() {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+class Particle {
+  constructor(x, y, size, speedY, type) {
+    this.x = x;
+    this.y = y;
+    this.size = size;
+    this.speedY = speedY;
+    this.type = type;
+    this.alpha = 1;
+  }
+  update() {
+    this.y += this.speedY;
+    if (this.y > height + this.size) {
+      this.y = -this.size;
+      this.x = Math.random() * width;
+      this.alpha = 1;
+    }
+    this.alpha -= 0.002;
+    if (this.alpha < 0) this.alpha = 0;
+  }
+  draw() {
+    ctx.save();
+    ctx.globalAlpha = this.alpha;
+    if (this.type === "star") {
+      ctx.fillStyle = "#ffc0cb";
+      ctx.beginPath();
+      ctx.moveTo(this.x, this.y);
+      for (let i = 0; i < 5; i++) {
+        ctx.lineTo(this.x + this.size * Math.cos((18 + i * 72) / 180 * Math.PI),
+                   this.y - this.size * Math.sin((18 + i * 72) / 180 * Math.PI));
+        ctx.lineTo(this.x + this.size / 2 * Math.cos((54 + i * 72) / 180 * Math.PI),
+                   this.y - this.size / 2 * Math.sin((54 + i * 72) / 180 * Math.PI));
+      }
+      ctx.closePath();
+      ctx.fill();
+    } else if (this.type === "petal") {
+      ctx.fillStyle = "#ffb6c1";
+      ctx.beginPath();
+      ctx.ellipse(this.x, this.y, this.size * 0.6, this.size * 1.2, Math.PI / 6, 0, 2 * Math.PI);
+      ctx.fill();
+    } else if (this.type === "balloon") {
+      ctx.fillStyle = "#ff6699";
+      ctx.beginPath();
+      ctx.ellipse(this.x, this.y, this.size, this.size * 1.3, 0, 0, 2 * Math.PI);
+      ctx.fill();
+      ctx.strokeStyle = "#cc3366";
+      ctx.beginPath();
+      ctx.moveTo(this.x, this.y + this.size * 1.3);
+      ctx.lineTo(this.x, this.y + this.size * 2);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
 }
 
-p.music-name {
-  margin-top: 10px;
-  font-size: 1.1em;
-  color: #c77dff;
-  text-shadow: 0 0 10px #7209b7;
+const particles = [];
+for (let i = 0; i < 50; i++) {
+  particles.push(new Particle(Math.random() * width, Math.random() * height, 7, 0.3 + Math.random() * 0.5, "star"));
+}
+for (let i = 0; i < 20; i++) {
+  particles.push(new Particle(Math.random() * width, Math.random() * height, 10, 0.7 + Math.random() * 0.3, "petal"));
+}
+for (let i = 0; i < 10; i++) {
+  particles.push(new Particle(Math.random() * width, Math.random() * height, 12, 0.9 + Math.random() * 0.4, "balloon"));
 }
 
-button {
-  background: #5f0f40;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1em;
-  border-radius: 15px;
-  margin: 5px;
-  cursor: pointer;
-  color: white;
-  transition: background 0.3s ease, box-shadow 0.3s;
-  box-shadow: 0 0 12px #7b2cbf;
+function animate() {
+  ctx.clearRect(0, 0, width, height);
+  particles.forEach(p => {
+    p.update();
+    p.draw();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+const quizQuestions = [
+  {
+    question: "Qual foi o nosso primeiro encontro?",
+    options: ["Fomos ao Shopping.", "Fomos Comer Açai.", "Fomos a Academia.", "Fomos ao Cinema."],
+    answer: "Fomos Comer Açai.",
+    image: "https://i.postimg.cc/MHKTRKkV/Whats-App-Image-2025-06-08-at-18-42-36.jpg"
+  },
+  {
+    question: "Qual é o meu maior sonho?",
+    options: ["Ser Jogador de Futebol!", "Arriscar Tudo até dar Certo!", "Fazer Faculdade!", "Virar Programador!"],
+    answer: "Arriscar Tudo até dar Certo!",
+    image: "https://i.postimg.cc/B6bk1dYt/Whats-App-Image-2025-06-08-at-18-42-36-2.jpg"
+  },
+  {
+    question: "Qual minha cor preferida?",
+    options: ["Preto", "Cinza", "Branco", "Azul"],
+    answer: "Azul",
+    image: "https://i.postimg.cc/jjf5T7X8/Whats-App-Image-2025-06-06-at-18-13-03.jpg"
+  },
+  {
+    question: "Quantos dias por semana a gente se vê?",
+    options: ["1 dias!", "3 dias! ", "5 dias!", "todos!"],
+    answer: "5 dias!",
+    image: "https://i.postimg.cc/63tF58RV/Whats-App-Image-2025-06-08-at-18-42-34-1.jpg"
+  },
+  {
+    question: "Quem disse “eu te amo” primeiro?",
+    options: ["LEONARDO", "LEONARDO", "LEONARDO", "ANNA"],
+    answer: "LEONARDO",
+    image: "https://i.postimg.cc/4dp4jHGz/Whats-App-Image-2025-06-08-at-18-42-34.jpg"
+  },
+  {
+    question: "Qual foi o dia do nosso primeiro beijo?",
+    options: ["26/02", "05/03", "11/03", "12/03"],
+    answer: "11/03",
+    image: "https://i.postimg.cc/HkfDT7Jh/Whats-App-Image-2025-06-06-at-18-13-05-3.jpg"
+  },
+  {
+    question: "Qual é a nossa linguagem do Amor?",
+    options: ["Toque fisico", "palavras de afirmação", "tempo de qualidade", "Atos de Serviço"],
+    answer: "Toque fisico",
+    image: "https://i.postimg.cc/63v9s2r9/Whats-App-Image-2025-06-06-at-18-13-04-2.jpg"
+   },
+  {
+    question: "Qual é o maior sonho que queremos realizar juntos?",
+    options: ["Ser bem sucedidos financeiramente!", "Termos nossa casa!", "Criar uma familia...", "Tudo Juntos!"],
+    answer: "Tudo Juntos!",
+    image: "https://i.postimg.cc/63tF58RV/Whats-App-Image-2025-06-08-at-18-42-34-1.jpg"
+  },
+  {
+    question: "Você Me AMA?",
+    options: ["SIM!", "SIM!", "SIM!", "SIM!"],
+    answer: "SIM!",
+    image: "https://i.postimg.cc/63tF58RV/Whats-App-Image-2025-06-08-at-18-42-34-1.jpg"
+  },
+  {
+    question: "O que eu quero com você?",
+    options: ["Viver cada momento", "Casar", "Construir uma vida", "TUDO ISSO JUNTOS!"],
+    answer: "TUDO ISSO JUNTOS!",
+    image: "https://i.postimg.cc/MGFtgX5K/Whats-App-Image-2025-06-08-at-18-42-35-2.jpg"
+  }
+];
+
+let currentQuestion = 0;
+
+function startQuiz() {
+  document.getElementById("start-quiz-btn").style.display = "none";
+  document.getElementById("quiz-container").style.display = "block";
+  showQuestion();
 }
 
-button:hover {
-  background: #7b2cbf;
-  box-shadow: 0 0 18px #c77dff;
+function showQuestion() {
+  const q = quizQuestions[currentQuestion];
+  document.getElementById("question-text").innerText = q.question;
+
+  const optionsDiv = document.getElementById("options");
+  optionsDiv.innerHTML = "";
+
+  // Adiciona a imagem se houver
+  const imgContainer = document.getElementById("question-image");
+  if (q.image) {
+    imgContainer.innerHTML = `<img src="${q.image}" alt="Imagem da pergunta" style="width: 100%; border-radius: 12px; margin-bottom: 15px; box-shadow: 0 0 10px #a64ca6;">`;
+  } else {
+    imgContainer.innerHTML = "";
+  }
+
+  q.options.forEach(option => {
+    const btn = document.createElement("button");
+    btn.innerText = option;
+    btn.onclick = () => {
+      if (option === q.answer) {
+        btn.style.backgroundColor = "#6a0dad";
+        btn.style.boxShadow = "0 0 12px #b266ff";
+        setTimeout(() => {
+          nextQuestion();
+        }, 600);
+      } else {
+        btn.style.backgroundColor = "#990033";
+        btn.style.boxShadow = "0 0 12px #990033";
+        alert("Errado! Comooo Asimmmm Amorrrrrrrrrr😤");
+      }
+    };
+    optionsDiv.appendChild(btn);
+  });
 }
 
-.photo-gallery h2 {
-  color: #9d4edd;
-  margin-bottom: 10px;
-  text-shadow: 0 0 15px #5a189a;
+function nextQuestion() {
+  currentQuestion++;
+  if (currentQuestion < quizQuestions.length) {
+    showQuestion();
+  } else {
+    document.getElementById("quiz-container").style.display = "none";
+    document.getElementById("love-letter").style.display = "block";
+  }
 }
 
-.thumbnails {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
+const startDate = new Date("2025-03-05T00:00:00"); // 🗓 data do início do namoro
 
-.thumbnails img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 12px;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: 0.3s;
-  box-shadow: 0 0 10px #5a189a;
-}
+  function updateLoveTimer() {
+    const now = new Date();
+    const diff = now - startDate;
 
-.thumbnails img:hover {
-  border-color: #7209b7;
-  transform: scale(1.1);
-  box-shadow: 0 0 20px #7209b7;
-}
+    const minutes = Math.floor(diff / 1000 / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const months = Math.floor(days / 30.44); // média de dias por mês
+    const years = Math.floor(months / 12);
 
-.full-image-view {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(10,0,20,0.9);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-  cursor: zoom-out;
-}
+    const displayMonths = months % 12;
+    const displayDays = Math.floor(days - months * 30.44);
+    const displayMinutes = minutes % 60;
 
-.full-image-view img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 20px;
-  box-shadow: 0 0 30px #7b2cbf;
-}
+    const timeString = `${years > 0 ? years + ' anos, ' : ''}${displayMonths} mêses, ${displayDays} dias e ${displayMinutes} minutos...`;
 
-.popup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 320px;
-  transform: translate(-50%, -50%);
-  background: #240046;
-  color: #d0bdf4;
-  padding: 25px 20px;
-  border-radius: 15px;
-  box-shadow: 0 0 25px #5f0f40;
-  z-index: 1000;
-  animation: fadeIn 0.5s ease;
-  text-align: center;
-  font-size: 1.2em;
-}
+    const timerEl = document.getElementById("timer");
+    if (timerEl) timerEl.textContent = timeString;
+  }
 
-.popup h2 {
-  margin-top: 0;
-  font-family: 'Dancing Script', cursive;
-  color: #c77dff;
-}
-
-.popup button {
-  background: #5f0f40;
-  color: white;
-  margin-top: 20px;
-  box-shadow: 0 0 15px #7209b7;
-  padding: 10px 20px;
-  border-radius: 15px;
-  cursor: pointer;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translate(-50%, -60%); }
-  to { opacity: 1; transform: translate(-50%, -50%); }
-}
-
-.click-heart {
-  position: absolute;
-  font-size: 2em;
-  color: #c77dff;
-  animation: floatUp 1s ease forwards;
-  pointer-events: none;
-  user-select: none;
-  z-index: 1500;
-}
-
-@keyframes floatUp {
-  0% { opacity: 1; transform: translateY(0) scale(1); }
-  100% { opacity: 0; transform: translateY(-120px) scale(1.5); }
-}
-
-canvas#background-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  width: 100vw;
-  height: 100vh;
-}
-
-#quiz-section {
-  margin-top: 40px;
-}
-
-#start-quiz-btn {
-  background: #7b2cbf;
-  padding: 15px 25px;
-  border-radius: 20px;
-  font-size: 1.2em;
-  color: white;
-  box-shadow: 0 0 12px #9d4edd;
-  transition: 0.3s;
-}
-
-#start-quiz-btn:hover {
-  background: #9d4edd;
-  transform: scale(1.05);
-}
-
-#quiz-container {
-  background: rgba(40, 0, 60, 0.6);
-  border-radius: 15px;
-  padding: 20px;
-  margin-top: 20px;
-  box-shadow: 0 0 15px #5f0f40;
-  max-width: 500px;
-  margin: 20px auto;
-}
-
-#question-text {
-  font-size: 1.4em;
-  color: #e0d4f7;
-  margin-bottom: 20px;
-}
-
-#options button {
-  display: block;
-  background: #7209b7;
-  border: none;
-  margin: 10px auto;
-  padding: 10px 20px;
-  border-radius: 10px;
-  font-size: 1em;
-  cursor: pointer;
-  color: white;
-  box-shadow: 0 0 10px #5a189a;
-}
-
-#options button:hover {
-  background: #9d4edd;
-}
-
-#love-letter {
-  background: #1e0033;
-  color: #d1c4e9;
-  padding: 30px;
-  margin: 30px auto;
-  border-radius: 20px;
-  max-width: 600px;
-  box-shadow: 0 0 20px #5a189a;
-}
-
-.letter-content {
-  text-align: left;
-  font-size: 1.2em;
-  line-height: 1.6;
-  max-height: 500px;
-  overflow-y: auto;
-}
-
-#love-timer {
-  margin-top: 20px;
-  padding: 20px;
-  background: rgba(125, 70, 190, 0.1);
-  border-radius: 20px;
-  box-shadow: 0 0 20px rgba(157, 78, 221, 0.6);
-  width: 90%;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  transition: transform 0.3s ease, box-shadow 0.3s;
-}
-
-#love-timer:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 25px #c77dff;
-}
-
-.timer-text {
-  font-size: 1.4em;
-  color: #e0b3ff;
-  text-shadow: 0 0 10px #800080;
-  margin-bottom: 15px;
-}
-
-.timer-photo {
-  width: 100%;
-  height: 300px; /* altura maior */
-  object-fit: cover;
-  border-radius: 15px;
-  border: 3px solid #e0b3ff;
-  box-shadow: 0 0 18px rgba(125, 70, 190, 0.7);
-}
-
+  document.addEventListener("DOMContentLoaded", function () {
+    updateLoveTimer();
+    setInterval(updateLoveTimer, 60000); // atualiza a cada minuto
+  });
 
